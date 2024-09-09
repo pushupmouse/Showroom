@@ -5,9 +5,9 @@ using UnityEngine;
 public class Student
 {
     public string Name;
-    public float Grade;
+    public double Grade;
     
-    public Student(string name, float grade)
+    public Student(string name, double grade)
     {
         Name = name;
         Grade = grade;
