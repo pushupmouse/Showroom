@@ -7,9 +7,18 @@ using Random = UnityEngine.Random;
 
 public class StudentManager : MonoBehaviour
 {
-    [SerializeField] private Transform entryTemplate;
-    [SerializeField] private GameObject grid;
+    public static StudentManager Instance;
 
+    [SerializeField] private StudentEntry entryTemplate;
+    [SerializeField] private GameObject grid;
+    [SerializeField] private GameObject studentListCanvas;
+    [SerializeField] private StudentDetails studentDetailsCanvas;
+    [SerializeField] private Transform screen;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -34,7 +43,7 @@ public class StudentManager : MonoBehaviour
         //display from the list
         for (int i = 0; i < studentEntries.studentEntryList.Count; i++)
         {
-            Transform newEntry = Instantiate(entryTemplate, grid.transform);
+            StudentEntry newEntry = Instantiate(entryTemplate, grid.transform);
 
             int rank = i + 1;
             string rankString;
@@ -48,16 +57,16 @@ public class StudentManager : MonoBehaviour
                 case 3: rankString = rank + "rd"; break;
             }
 
-            newEntry.Find("Rank Text").GetComponent<TextMeshProUGUI>().text = rankString;
-            newEntry.Find("Name Text").GetComponent<TextMeshProUGUI>().text = studentEntries.studentEntryList[i].Name;
-            newEntry.Find("Grade Text").GetComponent<TextMeshProUGUI>().text = studentEntries.studentEntryList[i].Grade.ToString();
+            newEntry.SaveDetails(rankString, studentEntries.studentEntryList[i].Name, studentEntries.studentEntryList[i].Grade);
+
+            newEntry.DisplayEntry();
         }
     }
 
-    private void AddStudent(string name, double grade)
+    private void AddStudent(string name, int yob, string address, double grade)
     {
         //create
-        Student student = new Student(name, grade);
+        Student student = new Student(name, yob, address, grade);
 
         //load
         string jsonString = PlayerPrefs.GetString("Student Entries");
@@ -72,6 +81,13 @@ public class StudentManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void SeeStudentDetails(string rank, string studentName, double grade)
+    {
+        studentListCanvas.SetActive(false);
+        StudentDetails studentDetails = Instantiate(studentDetailsCanvas, screen);
+        studentDetails.SetText(rank, studentName, grade);
+    }
+
     private class StudentEntries
     {
         public List<Student> studentEntryList;
@@ -81,11 +97,16 @@ public class StudentManager : MonoBehaviour
     private class Student
     {
         public string Name;
+        public int YoB;
+        public string Address;
         public double Grade;
+        //add image
 
-        public Student(string name, double grade)
+        public Student(string name, int yob, string address, double grade)
         {
             Name = name;
+            YoB = yob;
+            Address = address;
             Grade = grade;
         }
     }
