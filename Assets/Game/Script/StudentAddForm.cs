@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,8 +24,18 @@ public class StudentAddForm : MonoBehaviour
 
     private void CreateNewStudent()
     {
-        StudentManager.Instance.AddStudent(nameInput.text, int.Parse(yobInput.text), addressInput.text, double.Parse(gradeInput.text));
-        Destroy(gameObject);
+        Regex yearValidation = new Regex("^\\d*$");
+        Regex gradeValidation = new Regex("^\\d*\\.?\\d*$");
+
+        if (yearValidation.IsMatch(yobInput.text) && gradeValidation.IsMatch(gradeInput.text))
+        {
+            StudentManager.Instance.AddStudent(nameInput.text, int.Parse(yobInput.text), addressInput.text, double.Parse(gradeInput.text));
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("not valid");
+        }        
     }
 
     private void GoBack()
