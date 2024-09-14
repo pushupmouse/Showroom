@@ -569,6 +569,7 @@ GameObject:
   - component: {fileID: 1039722258436147499}
   - component: {fileID: 2569200415180261733}
   - component: {fileID: 3979216906879663468}
+  - component: {fileID: 8689207495377851132}
   m_Layer: 0
   m_Name: Name Input
   m_TagString: Untagged
@@ -701,7 +702,21 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2872151412875098809, guid: 0368ef89219e45d4db155518a7b2d3b8,
+          type: 3}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Experimental.UI.NonNativeKeyboard,
+          Assembly-CSharp
+        m_MethodName: PresentKeyboard
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls: []
@@ -726,12 +741,27 @@ MonoBehaviour:
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_OnFocusSelectAll: 1
-  m_ResetOnDeActivation: 1
+  m_OnFocusSelectAll: 0
+  m_ResetOnDeActivation: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &8689207495377851132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2939799059232239226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e7099901486cc41a055a85f419e3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: -0.25
+  verticalOffset: -0.25
+  positionSource: {fileID: 7231667328423167964}
 --- !u!1 &3083359932986938541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1472,7 @@ GameObject:
   - component: {fileID: 5458029546794805028}
   - component: {fileID: 6689371189852762496}
   - component: {fileID: 8710982820118760391}
+  - component: {fileID: 152127873863515329}
   m_Layer: 0
   m_Name: Year Input
   m_TagString: Untagged
@@ -1574,7 +1605,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls: []
@@ -1599,12 +1642,27 @@ MonoBehaviour:
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_OnFocusSelectAll: 1
-  m_ResetOnDeActivation: 1
+  m_OnFocusSelectAll: 0
+  m_ResetOnDeActivation: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &152127873863515329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414368972249753408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e7099901486cc41a055a85f419e3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: -0.25
+  verticalOffset: -0.25
+  positionSource: {fileID: 8667845974699213447}
 --- !u!1 &4558084170280228464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,7 +1808,6 @@ GameObject:
   - component: {fileID: 6275990812509413345}
   - component: {fileID: 8924848598874523985}
   - component: {fileID: 6621847917290215698}
-  - component: {fileID: 7075604372612595750}
   - component: {fileID: 2839753628278747095}
   - component: {fileID: 8769776873276258810}
   m_Layer: 0
@@ -1826,23 +1883,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &7075604372612595750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4573022062746811700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &2839753628278747095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2220,6 +2260,7 @@ GameObject:
   - component: {fileID: 1299287761663876179}
   - component: {fileID: 3109396959051897604}
   - component: {fileID: 8405821613744406203}
+  - component: {fileID: 9008467533080156502}
   m_Layer: 0
   m_Name: Address Input
   m_TagString: Untagged
@@ -2352,7 +2393,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls: []
@@ -2377,12 +2430,27 @@ MonoBehaviour:
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_OnFocusSelectAll: 1
-  m_ResetOnDeActivation: 1
+  m_OnFocusSelectAll: 0
+  m_ResetOnDeActivation: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &9008467533080156502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164965986306739912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e7099901486cc41a055a85f419e3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: -0.25
+  verticalOffset: -0.25
+  positionSource: {fileID: 814831775336976718}
 --- !u!1 &5229968956791415016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,6 +2634,7 @@ GameObject:
   - component: {fileID: 4574983033889111451}
   - component: {fileID: 1125947324754647390}
   - component: {fileID: 339390969104481697}
+  - component: {fileID: 7973614703519065778}
   m_Layer: 0
   m_Name: Grade Input
   m_TagString: Untagged
@@ -2698,7 +2767,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls: []
@@ -2723,12 +2804,27 @@ MonoBehaviour:
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_OnFocusSelectAll: 1
-  m_ResetOnDeActivation: 1
+  m_OnFocusSelectAll: 0
+  m_ResetOnDeActivation: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &7973614703519065778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5837215682799482968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e7099901486cc41a055a85f419e3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: -0.25
+  verticalOffset: -0.25
+  positionSource: {fileID: 6671506823595898460}
 --- !u!1 &6171974726672550316
 GameObject:
   m_ObjectHideFlags: 0

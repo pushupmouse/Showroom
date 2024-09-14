@@ -23,11 +23,6 @@ public class StudentAddForm : MonoBehaviour
 
     private void CreateNewStudent()
     {
-        Debug.Log(nameInput.text);
-        Debug.Log(yobInput.text);
-        Debug.Log(addressInput.text);
-        Debug.Log(gradeInput.text);
-
         StudentManager.Instance.AddStudent(nameInput.text, int.Parse(yobInput.text), addressInput.text, double.Parse(gradeInput.text));
         Destroy(gameObject);
     }
