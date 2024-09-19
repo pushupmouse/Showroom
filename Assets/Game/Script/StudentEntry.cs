@@ -37,6 +37,6 @@ public class StudentEntry : MonoBehaviour
 
     public void SeeDetails()
     {
-        StudentManager.Instance.SeeStudentDetails(rankNum, rank);
+        //StudentManager.Instance.SeeStudentDetails(rankNum, rank);
     }
 }

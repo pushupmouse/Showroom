@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "643996599079",
+    "firebase_url": "https://showroom-73238-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "showroom-73238",
+    "storage_bucket": "showroom-73238.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643996599079:android:16e85d3ec71bf65e8cdf02",
+        "android_client_info": {
+          "package_name": "com.google.firebase.showroom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVez96Ka1cGYu4vaC3LwczOqC8LJlRiKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

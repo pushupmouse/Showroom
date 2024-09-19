@@ -1247,7 +1247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1124421256160663245}
   m_Layer: 0
-  m_Name: Field (1)
+  m_Name: Birth year input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1917,7 +1917,7 @@ MonoBehaviour:
   backButton: {fileID: 3020176162405206699}
   saveButton: {fileID: 2417913764630933031}
   nameInput: {fileID: 3979216906879663468}
-  yobInput: {fileID: 8710982820118760391}
+  birthYearInput: {fileID: 8710982820118760391}
   addressInput: {fileID: 8405821613744406203}
   gradeInput: {fileID: 339390969104481697}
 --- !u!1 &4801345444603538150
@@ -2461,7 +2461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6711125209914315459}
   m_Layer: 0
-  m_Name: Field
+  m_Name: Name input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3021,7 +3021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4604873630702787024}
   m_Layer: 0
-  m_Name: Field (2)
+  m_Name: Address input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3429,7 +3429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430488554835967539}
   m_Layer: 0
-  m_Name: Field (3)
+  m_Name: Grade input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

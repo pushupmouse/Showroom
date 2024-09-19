@@ -35,13 +35,13 @@ public class StudentDetails : MonoBehaviour
 
     private void GoBack()
     {
-        StudentManager.Instance.DisplayStudentList();
-        Destroy(gameObject);
+        //StudentManager.Instance.DisplayStudentList();
+        //Destroy(gameObject);
     }
 
     private void DeleteStudent()
     {
-        StudentManager.Instance.DeleteStudent(rankNum);
-        Destroy(gameObject);
+        //StudentManager.Instance.DeleteStudent(rankNum);
+        //Destroy(gameObject);
     }
 }
