@@ -9,34 +9,30 @@ using UnityEngine.UI;
 public class StudentEntry : MonoBehaviour
 {
     [SerializeField] private Button button;
-    private string rank, studentName, address;
-    private double grade;
-    private int rankNum, yob;
+    [SerializeField] private TextMeshProUGUI rankText;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI gradeText;
+
+    private InteractiveScreen screen;
+    private int studentId;
 
     private void Start()
     {
         button.onClick.AddListener(SeeDetails);
     }
 
-    public void SaveDetails(int rankNum, string rank, string studentName, double grade, int yob, string address)
+    public void DisplayEntry(Student student, string rankString, InteractiveScreen screen)
     {
-        this.rankNum = rankNum;
-        this.rank = rank;
-        this.studentName = studentName;
-        this.grade = grade;
-        this.address = address;
-        this.yob = yob;
-    }
+        rankText.text = rankString;
+        nameText.text = student.Name;
+        gradeText.text = student.Grade.ToString();
 
-    public void DisplayEntry()
-    {
-        transform.Find("Rank Text").GetComponent<TextMeshProUGUI>().text = rank.ToString();
-        transform.Find("Name Text").GetComponent<TextMeshProUGUI>().text = studentName;
-        transform.Find("Grade Text").GetComponent<TextMeshProUGUI>().text = grade.ToString();
+        this.screen = screen;
+        studentId = student.Id;
     }
 
     public void SeeDetails()
     {
-        //StudentManager.Instance.SeeStudentDetails(rankNum, rank);
+        screen.SeeStudentDetails(studentId);
     }
 }

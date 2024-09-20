@@ -1808,7 +1808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bfcb8d1806ce948a8cc3d0517fef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rankText: {fileID: 3752760335373019289}
   studentNameText: {fileID: 2996171690579881810}
   gradeText: {fileID: 9139831793019739908}
   yobText: {fileID: 3607597536583919548}
@@ -2219,7 +2218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7284522014102656707
 RectTransform:
   m_ObjectHideFlags: 0

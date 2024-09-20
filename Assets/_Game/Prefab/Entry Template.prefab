@@ -508,3 +508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 2640418731459382454}
+  rankText: {fileID: 987679111709136864}
+  nameText: {fileID: 2048490033521242582}
+  gradeText: {fileID: 2755689197329635080}

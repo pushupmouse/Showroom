@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class StudentDetails : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI rankText;
     [SerializeField] private TextMeshProUGUI studentNameText;
     [SerializeField] private TextMeshProUGUI gradeText;
     [SerializeField] private TextMeshProUGUI yobText;
@@ -14,8 +13,7 @@ public class StudentDetails : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button deleteButton;
 
-    private int rankNum;
-
+    private InteractiveScreen screen;
 
     private void Start()
     {
@@ -23,20 +21,20 @@ public class StudentDetails : MonoBehaviour
         deleteButton.onClick.AddListener(DeleteStudent);
     }
 
-    public void SetText(string rank, string studentName, double grade, int yob, string address, int rankNum)
+    public void SetText(Student student, InteractiveScreen screen)
     {
-        rankText.text = rank;
-        studentNameText.text = studentName;
-        gradeText.text = grade.ToString();
-        yobText.text = yob.ToString();
-        addressText.text = address;
-        this.rankNum = rankNum;
+        studentNameText.text = student.Name;
+        gradeText.text = student.Grade.ToString();
+        yobText.text = student.BirthYear.ToString();
+        addressText.text = student.Address;
+
+        this.screen = screen;
     }
 
     private void GoBack()
     {
-        //StudentManager.Instance.DisplayStudentList();
-        //Destroy(gameObject);
+        screen.RefreshStudentList();
+        Destroy(gameObject);
     }
 
     private void DeleteStudent()
