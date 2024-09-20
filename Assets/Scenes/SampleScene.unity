@@ -2919,26 +2919,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618970052}
-  - component: {fileID: 618970051}
+  - component: {fileID: 618970053}
   m_Layer: 0
-  m_Name: Data Manager
+  m_Name: Database Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &618970051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618970050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bf39684ee46dc2439a37bc54fda8206, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &618970052
 Transform:
   m_ObjectHideFlags: 0
@@ -2954,6 +2942,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &618970053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618970050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4f50f09b1bca44a839b924a7cabe08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &676718601
 GameObject:
   m_ObjectHideFlags: 0
@@ -4367,7 +4367,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164725033}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2213c36610e3b1c4bbf886810ed9db12, type: 3}
   m_Name: 
@@ -4411,7 +4411,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164725033}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 919e39492806b334982b6b84c90dd927, type: 3}
   m_Name: 
@@ -5239,12 +5239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd2e80eefb9d49409358650140eb8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryTemplate: {fileID: 3736287868336512444, guid: 10e279b300f25af488cae2ca6d7253b5,
-    type: 3}
-  grid: {fileID: 221209762}
   studentListCanvas: {fileID: 1626709552}
-  studentDetailsCanvas: {fileID: 842922000217353816, guid: edff15bc23047524796033c90be31823,
-    type: 3}
   studentAddFormCanvas: {fileID: 8769776873276258810, guid: 81a60985a9096a24bafd468015d5240c,
     type: 3}
   screen: {fileID: 1778693142}
@@ -5409,7 +5404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1490324738
 MonoBehaviour:
   m_ObjectHideFlags: 0
