@@ -13,6 +13,7 @@ public class StudentDetails : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button editButton;
     [SerializeField] private Button deleteButton;
+    [SerializeField] private ImageLoader image;
 
     private InteractiveScreen screen;
     private Student student;
@@ -32,6 +33,8 @@ public class StudentDetails : MonoBehaviour
         gradeText.text = student.Grade.ToString();
         yobText.text = student.BirthYear.ToString();
         addressText.text = student.Address;
+
+        image.SetImage(student.ImageUrl);
 
         this.screen = screen;
     }

@@ -26,11 +26,13 @@ public class DatabaseManager : MonoBehaviour
 
     private void Start()
     {
-
+        //AddStudent("test image", 2000, "hcm", 6.7);
     }
 
     public void AddStudent(string name, int birthYear, string address, double grade)
     {
+        string hardcode = "https://firebasestorage.googleapis.com/v0/b/showroom-73238.appspot.com/o/studentmale.jpg?alt=media&token=049a9ffb-e233-4a5b-aa52-502ee87eb9f1";
+
         databaseReference.Child("lastStudentId").GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
@@ -48,7 +50,7 @@ public class DatabaseManager : MonoBehaviour
                     newStudentId = 1; // Set id to 1
                 }
 
-                Student newStudent = new Student(newStudentId, name, birthYear, address, grade);
+                Student newStudent = new Student(newStudentId, name, birthYear, address, grade, hardcode);
                 string json = JsonUtility.ToJson(newStudent);
 
                 databaseReference.Child("students").Child(newStudentId.ToString()).SetRawJsonValueAsync(json);
