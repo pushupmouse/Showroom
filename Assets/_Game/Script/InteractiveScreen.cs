@@ -23,8 +23,6 @@ public class InteractiveScreen : MonoBehaviour
         studentListCanvas.SetActive(true);
         addButton.onClick.AddListener(GoToAddForm);
         SortAndDisplayEntries();
-
-        //GenerateEntries();
     }
 
     private void SortAndDisplayEntries()
@@ -62,28 +60,33 @@ public class InteractiveScreen : MonoBehaviour
         }
     }
 
-
-
     private void GoToAddForm()
     {
-        //for (int i = spawnedEntries.Count; i > 0; i--)
-        //{
-        //    Destroy(spawnedEntries[i - 1].gameObject);
-        //    spawnedEntries.Remove(spawnedEntries[i - 1]);
-        //}
+        studentListCanvas.SetActive(false);
 
-        //studentListCanvas.SetActive(false);
-        //StudentAddForm studentAddForm = Instantiate(studentAddFormCanvas, screen);
+        StudentAddForm studentAddForm = Instantiate(studentAddFormCanvas, screen);
+        studentAddForm.OnInit(this);
+        studentAddForm.SetToAdd();
+    }
+
+    public void GoToEditForm(Student student)
+    {
+        studentListCanvas.SetActive(false);
+
+        StudentAddForm studentEditForm = Instantiate(studentAddFormCanvas, screen);
+        studentEditForm.OnInit(this);
+        studentEditForm.SetToEdit(student);
+    }
+
+
+    public void DeleteStudent(Student student)
+    {
+        DatabaseManager.Instance.DeleteStudent(student.Id);
+        RefreshStudentList();
     }
 
     public void SeeStudentDetails(int id)
     {
-        for (int i = spawnedEntries.Count; i > 0; i--)
-        {
-            Destroy(spawnedEntries[i - 1].gameObject);
-            spawnedEntries.Remove(spawnedEntries[i - 1]);
-        }
-
         studentListCanvas.SetActive(false);
         StudentDetails studentDetails = Instantiate(studentDetailsCanvas, screen);
 
@@ -97,69 +100,19 @@ public class InteractiveScreen : MonoBehaviour
         });
     }
 
-    //public void AddStudent(string name, int yob, string address, double grade)
-    //{
-    //    //create
-    //    Student student = new Student(name, yob, address, grade);
-
-    //    //load
-    //    string jsonString = PlayerPrefs.GetString("Student Entries");
-    //    StudentEntries studentEntries = JsonUtility.FromJson<StudentEntries>(jsonString);
-
-    //    //add to the list
-    //    studentEntries.studentEntryList.Add(student);
-
-    //    //save updated list
-    //    string json = JsonUtility.ToJson(studentEntries);
-    //    PlayerPrefs.SetString("Student Entries", json);
-    //    PlayerPrefs.Save();
-
-    //    SortEntries();
-    //    DisplayStudentList();
-    //}
-
-    //public void DeleteStudent(int rankNum)
-    //{
-    //    string jsonString = PlayerPrefs.GetString("Student Entries");
-    //    StudentEntries studentEntries = JsonUtility.FromJson<StudentEntries>(jsonString);
-
-    //    studentEntries.studentEntryList.RemoveAt(rankNum);
-    //    //save list
-    //    string json = JsonUtility.ToJson(studentEntries);
-    //    PlayerPrefs.SetString("Student Entries", json);
-    //    PlayerPrefs.Save();
-
-    //    //display updated list
-    //    DisplayStudentList();
-    //}
+    private void ClearEntries()
+    {
+        for (int i = spawnedEntries.Count; i > 0; i--)
+        {
+            Destroy(spawnedEntries[i - 1].gameObject);
+            spawnedEntries.Remove(spawnedEntries[i - 1]);
+        }
+    }
 
     public void RefreshStudentList()
     {
+        ClearEntries();
         studentListCanvas.SetActive(true);
-
         SortAndDisplayEntries();
     }
-
-    //private class StudentEntries
-    //{
-    //    public List<Student> studentEntryList;
-    //}
-
-    //[Serializable]
-    //public class Student
-    //{
-    //    public string Name;
-    //    public int YoB;
-    //    public string Address;
-    //    public double Grade;
-    //    //add image
-
-    //    public Student(string name, int yob, string address, double grade)
-    //    {
-    //        Name = name;
-    //        YoB = yob;
-    //        Address = address;
-    //        Grade = grade;
-    //    }
-    //}
 }

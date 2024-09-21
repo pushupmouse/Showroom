@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Device;
 using UnityEngine.UI;
 
 
@@ -13,10 +14,36 @@ public class StudentAddForm : MonoBehaviour
     [SerializeField] private TMP_InputField addressInput;
     [SerializeField] private TMP_InputField gradeInput;
 
+    private InteractiveScreen screen;
+    private int id;
+
     private void Start()
     {
         backButton.onClick.AddListener(GoBack);
+    }
+
+    public void OnInit(InteractiveScreen screen)
+    {
+        this.screen = screen;
+    }
+
+    public void SetToAdd()
+    {
+        saveButton.onClick.RemoveListener(UpdateStudent);
         saveButton.onClick.AddListener(CreateNewStudent);
+    }
+
+    public void SetToEdit(Student student)
+    {
+        id = student.Id;
+        
+        nameInput.text = student.Name;
+        birthYearInput.text = student.BirthYear.ToString();
+        addressInput.text = student.Address;
+        gradeInput.text = student.Grade.ToString();
+
+        saveButton.onClick.RemoveListener(CreateNewStudent);
+        saveButton.onClick.AddListener(UpdateStudent);
     }
 
     private void CreateNewStudent()
@@ -27,7 +54,7 @@ public class StudentAddForm : MonoBehaviour
         if (yearValidation.IsMatch(birthYearInput.text) && gradeValidation.IsMatch(gradeInput.text))
         {
             DatabaseManager.Instance.AddStudent(nameInput.text, int.Parse(birthYearInput.text), addressInput.text, double.Parse(gradeInput.text));
-            Destroy(gameObject);
+            GoBack();
         }
         else
         {
@@ -35,9 +62,25 @@ public class StudentAddForm : MonoBehaviour
         }        
     }
 
+    private void UpdateStudent()
+    {
+        Regex yearValidation = new Regex("^\\d*$");
+        Regex gradeValidation = new Regex("^\\d*\\.?\\d*$");
+
+        if (yearValidation.IsMatch(birthYearInput.text) && gradeValidation.IsMatch(gradeInput.text))
+        {
+            DatabaseManager.Instance.UpdateStudent(id, nameInput.text, int.Parse(birthYearInput.text), addressInput.text, double.Parse(gradeInput.text));
+            GoBack();
+        }
+        else
+        {
+            Debug.Log("not valid");
+        }
+    }
+
     private void GoBack()
     {
-        //StudentManager.Instance.DisplayStudentList();
+        screen.RefreshStudentList();
         Destroy(gameObject);
     }
 }

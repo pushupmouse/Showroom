@@ -14,11 +14,19 @@ public class DatabaseManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
+        // Disable persistence for real-time data only
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+
+        // Ensure real-time sync for the "students" node
+        databaseReference.Child("students").KeepSynced(true);
     }
 
     private void Start()
     {
-        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
     }
 
     public void AddStudent(string name, int birthYear, string address, double grade)
@@ -28,21 +36,40 @@ public class DatabaseManager : MonoBehaviour
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
+                int newStudentId;
 
-                //get last id to set a new id
-                int newStudentId = snapshot.Exists && snapshot.Value != null
-                    ? int.Parse(snapshot.Value.ToString()) + 1
-                    : 1; //set id to 1 if db empty
+                // Get last id to set a new id
+                if (snapshot.Exists && snapshot.Value != null)
+                {
+                    newStudentId = int.Parse(snapshot.Value.ToString()) + 1;
+                }
+                else // If the database is empty
+                {
+                    newStudentId = 1; // Set id to 1
+                }
 
                 Student newStudent = new Student(newStudentId, name, birthYear, address, grade);
-
                 string json = JsonUtility.ToJson(newStudent);
 
                 databaseReference.Child("students").Child(newStudentId.ToString()).SetRawJsonValueAsync(json);
-
                 databaseReference.Child("lastStudentId").SetValueAsync(newStudentId);
             }
         });
+    }
+
+    public void UpdateStudent(int studentId, string name, int birthYear, string address, double grade)
+    {
+        // Create a dictionary to hold the updated values
+        var updatedData = new Dictionary<string, object>
+        {
+            { "Name", name },
+            { "BirthYear", birthYear },
+            { "Address", address },
+            { "Grade", grade }
+        };
+
+        // Update the student data in the database
+        databaseReference.Child("students").Child(studentId.ToString()).UpdateChildrenAsync(updatedData);
     }
 
     private IEnumerator GetStudentDetails(Action<Student> callback, int id)
@@ -70,46 +97,20 @@ public class DatabaseManager : MonoBehaviour
         }, id));
     }
 
-    private IEnumerator GetTotalStudentsCount(Action<int> callback)
+    private IEnumerator GetAllStudentsDetails(Action<List<Student>> callback)
     {
-        var allStudentsData = databaseReference.Child("students").GetValueAsync();
-
-        yield return new WaitUntil(predicate: () => allStudentsData.IsCompleted);
-
-        if (allStudentsData.IsCompleted && allStudentsData.Result != null)
-        {
-            DataSnapshot snapshot = allStudentsData.Result;
-            int count = (int)snapshot.ChildrenCount; // Get the number of children (students)
-            callback.Invoke(count);
-        }
-        else
-        {
-            Debug.LogError("Failed to retrieve student count.");
-            callback.Invoke(0); // Return 0 if there was an error
-        }
-    }
-
-    private IEnumerator GetAllStudentsDetails(Action<List<Student>> callback, int expectedCount, int maxRetries = 3)
-    {
-        int attempts = 0;
         List<Student> studentsList = new List<Student>();
 
-        while (attempts < maxRetries)
+        // Fetch all students data from the database
+        var allStudentsData = databaseReference.Child("students").GetValueAsync();
+
+        yield return new WaitUntil(predicate: ()=> allStudentsData.IsCompleted);
+
+        DataSnapshot snapshot = allStudentsData.Result;
+
+        if (allStudentsData.IsCompleted)
         {
-            var allStudentsData = databaseReference.Child("students").GetValueAsync();
-
-            yield return new WaitUntil(predicate: () => allStudentsData.IsCompleted);
-
-            if (!allStudentsData.IsCompleted || allStudentsData.Result == null)
-            {
-                Debug.LogError("Failed to retrieve student data.");
-                attempts++;
-                yield return new WaitForSeconds(1); // Wait before retrying
-                continue; // Skip to the next iteration
-            }
-
-            DataSnapshot snapshot = allStudentsData.Result;
-
+            // Iterate through all students and add them to the list
             foreach (var child in snapshot.Children)
             {
                 string json = child.GetRawJsonValue();
@@ -119,28 +120,19 @@ public class DatabaseManager : MonoBehaviour
                     studentsList.Add(student);
                 }
             }
-
-            // Check if we got the expected count
-            if (studentsList.Count == expectedCount)
-            {
-                callback.Invoke(studentsList);
-                yield break; // Exit if we got the expected count
-            }
-
-            Debug.LogWarning($"Attempt {attempts + 1}: Expected {expectedCount} students, but got {studentsList.Count}. Retrying...");
-            attempts++;
-            yield return new WaitForSeconds(1); // Wait before retrying
         }
 
-        // Final callback with the retrieved list (even if incomplete)
+        // Invoke the callback with the retrieved list of students
         callback.Invoke(studentsList);
+    }
+
+    public void DeleteStudent(int studentId)
+    {
+        databaseReference.Child("students").Child(studentId.ToString()).RemoveValueAsync();
     }
 
     public void GetAllStudents(Action<List<Student>> callback)
     {
-        StartCoroutine(GetTotalStudentsCount(count =>
-        {
-            StartCoroutine(GetAllStudentsDetails(callback, count)); // Pass the count to the details fetch
-        }));
+        StartCoroutine(GetAllStudentsDetails(callback));
     }
 }
