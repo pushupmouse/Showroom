@@ -14,19 +14,15 @@ public class ImageLoader : MonoBehaviour
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-    private string link;
-
     private void Start()
     {
         storage = FirebaseStorage.DefaultInstance;
-        storageReference = storage.GetReferenceFromUrl("gs://firestoreshowroom.appspot.com/");
-
-        StartCoroutine(SetImage());
+        storageReference = storage.GetReferenceFromUrl("gs://firestoreshowroom.appspot.com/images/");
     }
 
-    private IEnumerator SetImage()
+    public IEnumerator SetImage(string imageName)
     {
-        StorageReference image = storageReference.Child("studentfemale.jpg");
+        StorageReference image = storageReference.Child(imageName);
 
         var task = image.GetDownloadUrlAsync();
 
@@ -37,9 +33,7 @@ public class ImageLoader : MonoBehaviour
             yield break;
         }
 
-        link = task.Result.ToString();
-
-        yield return StartCoroutine(LoadImage(link));
+        yield return StartCoroutine(LoadImage(task.Result.ToString()));
     }
 
     public IEnumerator LoadImage(string imageUrl)

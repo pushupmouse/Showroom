@@ -8,15 +8,15 @@ public class Student
     [FirestoreProperty] public int BirthYear { get; set; }
     [FirestoreProperty] public string Address { get; set; }
     [FirestoreProperty] public double Grade { get; set; }
-    [FirestoreProperty] public string ImageUrl { get; set; }
+    [FirestoreProperty] public string ImageName { get; set; }
 
-    public Student(string name, int birthYear, string address, double grade, string imageUrl)
+    public Student(string name, int birthYear, string address, double grade, string imageName)
     {
         Name = name;
         BirthYear = birthYear;
         Address = address;
         Grade = grade;
-        ImageUrl = imageUrl;
+        ImageName = imageName;
     }
 
     public Student() { }

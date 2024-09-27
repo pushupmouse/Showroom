@@ -13,6 +13,7 @@ public class StudentDetails : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button editButton;
     [SerializeField] private Button deleteButton;
+    [SerializeField] private ImageLoader imageLoader;
 
     private InteractiveScreen screen;
     private Student student;
@@ -34,6 +35,8 @@ public class StudentDetails : MonoBehaviour
         addressText.text = student.Address;
 
         this.screen = screen;
+
+        StartCoroutine(imageLoader.SetImage(student.ImageName));
     }
 
     private void OnBackButtonClick()

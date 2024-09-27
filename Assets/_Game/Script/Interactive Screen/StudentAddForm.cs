@@ -13,13 +13,16 @@ public class StudentAddForm : MonoBehaviour
     [SerializeField] private TMP_InputField birthYearInput;
     [SerializeField] private TMP_InputField addressInput;
     [SerializeField] private TMP_InputField gradeInput;
+    [SerializeField] private Button uploadButton;
 
     private InteractiveScreen screen;
     private string id;
+    private string imageName;
 
     private void Start()
     {
         backButton.onClick.AddListener(GoBack);
+        uploadButton.onClick.AddListener(UploadImage);
     }
 
     public void OnInit(InteractiveScreen screen)
@@ -42,6 +45,8 @@ public class StudentAddForm : MonoBehaviour
         addressInput.text = student.Address;
         gradeInput.text = student.Grade.ToString();
 
+        imageName = student.ImageName;
+
         saveButton.onClick.RemoveListener(CreateNewStudent);
         saveButton.onClick.AddListener(UpdateStudent);
     }
@@ -53,7 +58,7 @@ public class StudentAddForm : MonoBehaviour
 
         if (yearValidation.IsMatch(birthYearInput.text) && gradeValidation.IsMatch(gradeInput.text))
         {
-            Student student = new Student(nameInput.text, int.Parse(birthYearInput.text), addressInput.text, double.Parse(gradeInput.text), "imageUrl");
+            Student student = new Student(nameInput.text, int.Parse(birthYearInput.text), addressInput.text, double.Parse(gradeInput.text), imageName);
             FirestoreManager.Instance.AddStudent(student);
             GoBack();
         }
@@ -70,7 +75,7 @@ public class StudentAddForm : MonoBehaviour
 
         if (yearValidation.IsMatch(birthYearInput.text) && gradeValidation.IsMatch(gradeInput.text))
         {
-            Student student = new Student(nameInput.text, int.Parse(birthYearInput.text), addressInput.text, double.Parse(gradeInput.text), "imageUrl");
+            Student student = new Student(nameInput.text, int.Parse(birthYearInput.text), addressInput.text, double.Parse(gradeInput.text), imageName);
             student.Id = id;
 
             FirestoreManager.Instance.UpdateStudent(student);
@@ -86,5 +91,13 @@ public class StudentAddForm : MonoBehaviour
     {
         screen.RefreshStudentList();
         Destroy(gameObject);
+    }
+
+    private void UploadImage()
+    {
+        StartCoroutine(ImageUploader.Instance.ShowLoadDialogCoroutine(callback =>
+        {
+            imageName = callback.ToString();
+        }));
     }
 }
