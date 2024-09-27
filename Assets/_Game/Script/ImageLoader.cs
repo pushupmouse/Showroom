@@ -1,45 +1,50 @@
 using Firebase.Storage;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Firebase;
+using Firebase.Extensions;
+using Unity.Profiling;
 
 public class ImageLoader : MonoBehaviour
 {
-    [SerializeField] private RawImage image;
+    [SerializeField] private RawImage rawImage;
 
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
+    private string link;
+
     private void Start()
     {
-        //storage = FirebaseStorage.DefaultInstance;
-        //storageReference = storage.GetReferenceFromUrl("gs://showroom-73238.appspot.com/");
+        storage = FirebaseStorage.DefaultInstance;
+        storageReference = storage.GetReferenceFromUrl("gs://firestoreshowroom.appspot.com/");
 
-        //StorageReference image = storageReference.Child("studentmale.jpg");
-
-        //image.GetDownloadUrlAsync().ContinueWith(task =>
-        //{
-        //    if (task.IsCompleted && !task.IsFaulted)
-        //    {
-        //        StartCoroutine(LoadImage(task.Result.ToString()));
-        //    }
-        //});
+        StartCoroutine(SetImage());
     }
 
-    public void SetImage(string imageUrl)
+    private IEnumerator SetImage()
     {
-        StartCoroutine(LoadImage(imageUrl));
+        StorageReference image = storageReference.Child("studentfemale.jpg");
+
+        var task = image.GetDownloadUrlAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.IsFaulted || task.IsCanceled)
+        {
+            yield break;
+        }
+
+        link = task.Result.ToString();
+
+        yield return StartCoroutine(LoadImage(link));
     }
 
-    public IEnumerator LoadImage(string url)
+    public IEnumerator LoadImage(string imageUrl)
     {
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(imageUrl);
 
         yield return request.SendWebRequest();
 
@@ -49,7 +54,7 @@ public class ImageLoader : MonoBehaviour
         }
         else
         {
-            image.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            rawImage.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
         }
     }
 }

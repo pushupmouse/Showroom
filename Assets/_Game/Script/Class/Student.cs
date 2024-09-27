@@ -1,19 +1,23 @@
+using Firebase.Firestore;
+
+[FirestoreData]
 public class Student
 {
-    public int Id;
-    public string Name;
-    public int BirthYear;
-    public string Address;
-    public double Grade;
-    public string ImageUrl;
+    [FirestoreProperty] public string Id { get; set; }
+    [FirestoreProperty] public string Name {  get; set; }
+    [FirestoreProperty] public int BirthYear { get; set; }
+    [FirestoreProperty] public string Address { get; set; }
+    [FirestoreProperty] public double Grade { get; set; }
+    [FirestoreProperty] public string ImageUrl { get; set; }
 
-    public Student(int id, string name, int birthYear, string address, double grade, string imageUrl)
+    public Student(string name, int birthYear, string address, double grade, string imageUrl)
     {
-        Id = id;
         Name = name;
         BirthYear = birthYear;
         Address = address;
         Grade = grade;
         ImageUrl = imageUrl;
     }
+
+    public Student() { }
 }
