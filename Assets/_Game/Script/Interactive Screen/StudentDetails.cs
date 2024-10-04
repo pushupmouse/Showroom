@@ -41,7 +41,7 @@ public class StudentDetails : MonoBehaviour
 
     private void OnBackButtonClick()
     {
-        screen.RefreshStudentList();
+        screen.ShowStudentList();
         Destroy(gameObject);
     }
 

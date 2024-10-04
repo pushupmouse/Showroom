@@ -10,6 +10,7 @@ public class InteractiveScreen : MonoBehaviour
     [SerializeField] private StudentEntry entryTemplate;
     [SerializeField] private GameObject grid;
     [SerializeField] private GameObject studentListCanvas;
+    [SerializeField] private AuthView authViewCanvas;
     [SerializeField] private StudentDetails studentDetailsCanvas;
     [SerializeField] private StudentAddForm studentAddFormCanvas;
     [SerializeField] private Transform screen;
@@ -19,9 +20,34 @@ public class InteractiveScreen : MonoBehaviour
 
     private void Start()
     {
-        studentListCanvas.SetActive(true);
         addButton.onClick.AddListener(GoToAddForm);
-        StartCoroutine(DisplayEntries());
+
+        FirebaseAuthManager.Instance.OnLoginSuccess += HandleLoginSuccess;
+
+        DisplayAuthView();
+    }
+
+    private void HandleLoginSuccess()
+    {
+        Debug.Log("Login Successful! Now showing student list view...");
+        ShowStudentList();
+
+        FirebaseAuthManager.Instance.GetUserRole(role =>
+        {
+            if (role != null)
+            {
+                Debug.Log("Current User Role: " + role);
+            }
+            else
+            {
+                Debug.Log("Failed to fetch the user role.");
+            }
+        });
+    }
+    private void DisplayAuthView()
+    {
+        AuthView authview = Instantiate(authViewCanvas, screen);
+        authview.ShowLogin();
     }
 
     private IEnumerator DisplayEntries()
@@ -80,7 +106,7 @@ public class InteractiveScreen : MonoBehaviour
     public void DeleteStudent(Student student)
     {
         FirestoreManager.Instance.DeleteStudent(student.Id);
-        RefreshStudentList();
+        ShowStudentList();
     }
 
     public IEnumerator SeeStudentDetails(string id)
@@ -106,7 +132,7 @@ public class InteractiveScreen : MonoBehaviour
         }
     }
 
-    public void RefreshStudentList()
+    public void ShowStudentList()
     {
         ClearEntries();
         studentListCanvas.SetActive(true);

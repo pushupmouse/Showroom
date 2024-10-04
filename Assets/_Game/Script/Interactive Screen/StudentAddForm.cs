@@ -89,7 +89,7 @@ public class StudentAddForm : MonoBehaviour
 
     private void GoBack()
     {
-        screen.RefreshStudentList();
+        screen.ShowStudentList();
         Destroy(gameObject);
     }
 
