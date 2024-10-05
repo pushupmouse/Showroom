@@ -25,6 +25,12 @@ public class StudentDetails : MonoBehaviour
         deleteButton.onClick.AddListener(OnDeleteButtonClick);
     }
 
+    public void RestrictFunctions()
+    {
+        editButton.gameObject.SetActive(false);
+        deleteButton.gameObject.SetActive(false);
+    }
+
     public void SetText(Student student, InteractiveScreen screen)
     {
         this.student = student;

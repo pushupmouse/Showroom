@@ -56,11 +56,11 @@ public class AuthView : MonoBehaviour
 
     private void Login()
     {
-        if (emailLoginField.text == "")
+        if (string.IsNullOrWhiteSpace(emailLoginField.text))
         {
             Debug.Log("Email field is empty");
         }
-        else if (passwordLoginField.text == "")
+        else if (string.IsNullOrWhiteSpace(passwordLoginField.text))
         {
             Debug.Log("Password is empty");
         }
@@ -72,11 +72,11 @@ public class AuthView : MonoBehaviour
 
     private void Register()
     {
-        if (usernameRegisterField.text == "")
+        if (string.IsNullOrWhiteSpace(usernameRegisterField.text))
         {
             Debug.Log("Username is empty");
         }
-        else if (emailRegisterField.text == "")
+        else if (string.IsNullOrWhiteSpace(emailRegisterField.text))
         {
             Debug.Log("Email field is empty");
         }
@@ -87,7 +87,6 @@ public class AuthView : MonoBehaviour
         else
         {
             FirebaseAuthManager.Instance.Register(usernameRegisterField.text, emailRegisterField.text, passwordRegisterField.text, roleDropdown.options[roleDropdown.value].text);
-
         }
     }
 }

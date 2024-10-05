@@ -16,6 +16,7 @@ public class FirebaseAuthManager : MonoBehaviour
     private FirebaseAuth auth;
     private FirebaseUser user;
 
+    public FirebaseUser User => user;
     public event Action OnLoginSuccess;
     public event Action OnRegisterSuccess;
 
@@ -194,17 +195,7 @@ public class FirebaseAuthManager : MonoBehaviour
         };
 
         // Save user role to Firestore
-        db.Collection("users").Document(userId).SetAsync(userData).ContinueWithOnMainThread(task =>
-        {
-            if (task.IsCompleted)
-            {
-                Debug.Log("User role saved successfully");
-            }
-            else
-            {
-                Debug.LogError("Failed to save user role: " + task.Exception);
-            }
-        });
+        db.Collection("users").Document(userId).SetAsync(userData);
     }
 
     public void GetUserRole(Action<string> onRoleFetched)
@@ -223,15 +214,21 @@ public class FirebaseAuthManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("No user data found for this user.");
                     onRoleFetched?.Invoke(null);
                 }
             }
             else
             {
-                Debug.LogError("Failed to retrieve user role: " + task.Exception);
                 onRoleFetched?.Invoke(null);
             }
         });
+    }
+
+    public void LogOut()
+    {
+        if (auth != null && user != null)
+        {
+            auth.SignOut();
+        }
     }
 }

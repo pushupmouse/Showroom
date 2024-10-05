@@ -15,12 +15,17 @@ public class InteractiveScreen : MonoBehaviour
     [SerializeField] private StudentAddForm studentAddFormCanvas;
     [SerializeField] private Transform screen;
     [SerializeField] private Button addButton;
+    [SerializeField] private Button logOutButton;
+    [SerializeField] private TextMeshProUGUI usernameText;
 
     private List<StudentEntry> spawnedEntries = new List<StudentEntry>();
+
+    private string currentRole;
 
     private void Start()
     {
         addButton.onClick.AddListener(GoToAddForm);
+        logOutButton.onClick.AddListener(OnLogoutButtonClick);
 
         FirebaseAuthManager.Instance.OnLoginSuccess += HandleLoginSuccess;
 
@@ -29,19 +34,25 @@ public class InteractiveScreen : MonoBehaviour
 
     private void HandleLoginSuccess()
     {
-        Debug.Log("Login Successful! Now showing student list view...");
         ShowStudentList();
 
         FirebaseAuthManager.Instance.GetUserRole(role =>
         {
             if (role != null)
             {
-                Debug.Log("Current User Role: " + role);
+                currentRole = role;
             }
             else
             {
                 Debug.Log("Failed to fetch the user role.");
             }
+
+            if(currentRole == "Admin")
+            {
+                addButton.gameObject.SetActive(true);
+            }
+
+            usernameText.text = FirebaseAuthManager.Instance.User.DisplayName + " (" + currentRole + ")";
         });
     }
     private void DisplayAuthView()
@@ -114,6 +125,11 @@ public class InteractiveScreen : MonoBehaviour
         studentListCanvas.SetActive(false);
         StudentDetails studentDetails = Instantiate(studentDetailsCanvas, screen);
 
+        if(currentRole != "Admin")
+        {
+            studentDetails.RestrictFunctions();
+        }
+
         yield return StartCoroutine(FirestoreManager.Instance.GetStudentById(id, student =>
         {
             if (student != null)
@@ -137,5 +153,12 @@ public class InteractiveScreen : MonoBehaviour
         ClearEntries();
         studentListCanvas.SetActive(true);
         StartCoroutine(DisplayEntries());
+    }
+
+    private void OnLogoutButtonClick()
+    {
+        FirebaseAuthManager.Instance.LogOut();
+        studentListCanvas.SetActive(false);
+        DisplayAuthView();
     }
 }
