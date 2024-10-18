@@ -19,6 +19,7 @@ public class InteractiveScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI usernameText;
 
     private List<StudentEntry> spawnedEntries = new List<StudentEntry>();
+    private AuthView instantiatedAuthView;
 
     private string currentRole;
 
@@ -26,6 +27,8 @@ public class InteractiveScreen : MonoBehaviour
     {
         addButton.onClick.AddListener(GoToAddForm);
         logOutButton.onClick.AddListener(OnLogoutButtonClick);
+
+        studentListCanvas.SetActive(false);
 
         FirebaseAuthManager.Instance.OnLoginSuccess += HandleLoginSuccess;
 
@@ -42,14 +45,14 @@ public class InteractiveScreen : MonoBehaviour
             {
                 currentRole = role;
             }
-            else
-            {
-                Debug.Log("Failed to fetch the user role.");
-            }
 
             if (currentRole == "Admin")
             {
                 addButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                addButton.gameObject.SetActive(false);
             }
 
             usernameText.text = FirebaseAuthManager.Instance.User.DisplayName + " (" + currentRole + ")";
@@ -57,8 +60,8 @@ public class InteractiveScreen : MonoBehaviour
     }
     private void DisplayAuthView()
     {
-        AuthView authview = Instantiate(authViewCanvas, screen);
-        authview.ShowLogin();
+        instantiatedAuthView = Instantiate(authViewCanvas, screen);
+        instantiatedAuthView.ShowLogin();
     }
 
     private IEnumerator DisplayEntries()
@@ -159,6 +162,13 @@ public class InteractiveScreen : MonoBehaviour
     {
         FirebaseAuthManager.Instance.LogOut();
         studentListCanvas.SetActive(false);
+
+        if (instantiatedAuthView != null)
+        {
+            Destroy(instantiatedAuthView.gameObject);
+            instantiatedAuthView = null;
+        }
+
         DisplayAuthView();
     }
 }

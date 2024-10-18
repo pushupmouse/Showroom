@@ -81,8 +81,6 @@ public class FirebaseAuthManager : MonoBehaviour
             //get the user info
             user = loginTask.Result.User;
 
-            Debug.LogFormat("Successfully Logged In as {0}", user.DisplayName);
-
             OnLoginSuccess?.Invoke();
         }
     }
