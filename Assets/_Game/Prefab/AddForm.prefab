@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 7231667328423167964}
 --- !u!1 &3083359932986938541
 GameObject:
@@ -1661,7 +1661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 8667845974699213447}
 --- !u!1 &4558084170280228464
 GameObject:
@@ -1882,7 +1882,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2839753628278747095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2450,7 +2450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 814831775336976718}
 --- !u!1 &5229968956791415016
 GameObject:
@@ -2945,7 +2945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 6671506823595898460}
 --- !u!1 &6171974726672550316
 GameObject:

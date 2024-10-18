@@ -34,7 +34,10 @@ public class AuthView : MonoBehaviour
 
     private void HandleLoginSuccess()
     {
-        Destroy(gameObject);
+        if(gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void HandleRegisterSuccess()

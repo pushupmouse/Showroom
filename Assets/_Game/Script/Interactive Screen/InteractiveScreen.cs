@@ -47,7 +47,7 @@ public class InteractiveScreen : MonoBehaviour
                 Debug.Log("Failed to fetch the user role.");
             }
 
-            if(currentRole == "Admin")
+            if (currentRole == "Admin")
             {
                 addButton.gameObject.SetActive(true);
             }

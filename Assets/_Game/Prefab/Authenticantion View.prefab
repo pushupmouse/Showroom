@@ -527,7 +527,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7321851838780121922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2646,7 +2646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 6603491268609913848}
 --- !u!1 &4907183251568143930
 GameObject:
@@ -3079,7 +3079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 7512798146942864687}
 --- !u!1 &5623721035553960043
 GameObject:
@@ -3500,7 +3500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 6232911132769679007}
 --- !u!1 &6019266963154926318
 GameObject:
@@ -3916,7 +3916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3280650372810626106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4168,7 +4168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 1276263942002307585}
 --- !u!1 &7075281936203088583
 GameObject:
@@ -4618,7 +4618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4167321630257631929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5327,7 +5327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 5673459501230914829}
 --- !u!1 &8705050431515854374
 GameObject:
@@ -5673,7 +5673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: -0.25
-  verticalOffset: -0.25
+  verticalOffset: -1
   positionSource: {fileID: 4280163774333931815}
 --- !u!1 &9021148440399518156
 GameObject:
