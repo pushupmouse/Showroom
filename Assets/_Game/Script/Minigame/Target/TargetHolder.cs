@@ -17,7 +17,7 @@ public class TargetHolder : MonoBehaviour
 
     public void Setup(TargetSpawner spawner, int x, int y)
     {
-        target.Deactivate();
+        DeactivateTarget();
         this.spawner = spawner;
         this.x = x;
         this.y = y;
@@ -26,12 +26,17 @@ public class TargetHolder : MonoBehaviour
     public void OnTargetHit()
     {
         spawner.SpawnRandomTarget(x, y);
-        target.Activate();
-
+        spawner.OnTargetHit();
+        ActivateTarget();
     }
 
     public void ActivateTarget()
     {
         target.Activate();
+    }
+
+    public void DeactivateTarget()
+    {
+        target.Deactivate();
     }
 }

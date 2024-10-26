@@ -6,22 +6,20 @@ public class TargetSpawner : MonoBehaviour
 {
     [SerializeField] private TargetHolder targetSpawn;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private int rows = 2;
-    [SerializeField] private int columns = 2;
     [SerializeField] private float targetSize = 1.0f;
 
     private List<List<TargetHolder>> targets = new List<List<TargetHolder>>();
 
     private void Start()
     {
-        SpawnGrid();
+        MinigameManager.Instance.OnTimerEnded += HandleOnTimerHit;
     }
 
-    private void SpawnGrid()
+    public void SpawnTargets(int rows, int columns)
     {
         Vector3 gridOffset = spawnPoint.position
-                              + spawnPoint.right * ((columns - 1) * targetSize / 2) // Shift to the right for centering
-                              - spawnPoint.up * ((rows - 1) * targetSize / 2);   // Center vertically
+                              + spawnPoint.right * ((columns - 1) * targetSize / 2); // Shift to the right for centering
+                              
 
         // Loop through columns (x)
         for (int x = 0; x < columns; x++)
@@ -75,4 +73,30 @@ public class TargetSpawner : MonoBehaviour
         selectedTarget.ActivateTarget();
     }
 
+    public void OnTargetHit()
+    {
+        MinigameManager.Instance.IncreaseScoreBy(1);
+    }
+
+    private void HandleOnTimerHit()
+    {
+        // Loop through each column in the targets list
+        foreach (var column in targets)
+        {
+            // Loop through each target in the column
+            foreach (var target in column)
+            {
+                // Deactivate the target
+                target.DeactivateTarget();
+
+                // Destroy the target GameObject
+                Destroy(target.gameObject);
+            }
+        }
+
+        // Clear the 2D list after destroying the targets
+        targets.Clear();
+
+        MinigameManager.Instance.ShowMenu(false);
+    }
 }
